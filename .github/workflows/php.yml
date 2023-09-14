@@ -1,0 +1,20 @@
+name: First action
+
+on: [ push, pull_request ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Verifica sintaxe de src/factory.php
+      run: php -l src/factory.php
